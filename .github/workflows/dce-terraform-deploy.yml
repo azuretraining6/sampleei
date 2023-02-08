@@ -29,8 +29,8 @@ jobs:
       #   timeout-minutes: 1
       - name: echo shell script
         run: |
-          ls -l 
-          head prerequisite_resources.sh
+          ls -l ./bootstrap 
+          head ./bootstrap/prerequisite_resources.sh
       - name: Bootstrap
         run: ./prerequisite_resources.sh $TEAM $ENVIRONEMT $LOCATION
         working-directory: bootstrap
