@@ -4,7 +4,7 @@
 #az login
 
 TEAM="oon"
-ENVIRONEMT="dce"
-LOCATION="centralus"
+ENVIRONEMT="production"
+LOCATION="eastus"
 
 ./prerequisite_resources.sh $TEAM $ENVIRONEMT $LOCATION
