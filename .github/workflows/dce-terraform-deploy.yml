@@ -4,15 +4,15 @@ on:
 
 jobs:
   build:
-    runs-on: uhg-runner
+    runs-on: ubuntu-latest
     env:
       TEAM: of
-      ENVIRONEMT: dce
-      LOCATION: centralus
-      ARM_CLIENT_ID: c2230330-8c25-4aad-848c-079861ff83b3
-      ARM_CLIENT_SECRET: ${{ secrets.DCE_ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: a4c136ae-2822-4829-b02f-5612fb1b6bfc
-      ARM_TENANT_ID: db05faca-c82a-4b9d-b9c5-0f64b6755421
+      ENVIRONEMT: production
+      LOCATION: eastus
+      ARM_CLIENT_ID: 7c8e6ffe-4a06-41bd-ac7e-4a7dd5b7d067
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 14794eab-e638-4c6e-9e78-33c378312767
+      ARM_TENANT_ID: fac4f30d-a2ea-4dda-9871-1dc986c702bd
     name: "Terraform Deploy"
     steps:
       - uses: actions/checkout@v3
@@ -34,8 +34,6 @@ jobs:
         run: |
           ARM_ACCESS_KEY=$(az storage account keys list --account-name "st${TEAM}${ENVIRONEMT}tfstate" --query "[0].value" | tr -d '"')
           echo "ARM_ACCESS_KEY=${ARM_ACCESS_KEY}" >> $GITHUB_ENV
-      - name: "Git Config URL"
-        run: git config --global url."https://jgrif106:${{ secrets.GH_PAT }}@github.com".insteadOf "https://github.com"
       - name: "Terraform Init Azure Cloud"
         run: terraform init -backend-config dce/backend.tf
         working-directory: terraform/azure-cloud
