@@ -1,0 +1,25 @@
+name: Docker Upload
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: uhg-runner
+    name: "Docker Upload"
+    steps:
+      - uses: actions/checkout@v3
+      - name: docker login
+        run: docker login -u dsidops -p ${{ secrets.DOCKER_REGISTERY_PASSWORD }} optum-docker.repo1.uhc.com
+        working-directory: docker
+      - name: docker build version number
+        run: docker build --no-cache=True -t optum-docker.repo1.uhc.com/dsi/oon-eandi-terraform/staging:1.0.${{ github.run_number }} .
+        working-directory: docker
+      - name: docker push version number
+        run: docker push optum-docker.repo1.uhc.com/dsi/oon-eandi-terraform/staging:1.0.${{ github.run_number }}
+        working-directory: docker
+      - name: docker build latest
+        run: docker build --no-cache=True -t optum-docker.repo1.uhc.com/dsi/oon-eandi-terraform:latest .
+        working-directory: docker
+      - name: docker push latest
+        run: docker push optum-docker.repo1.uhc.com/dsi/oon-eandi-terraform:latest
+        working-directory: docker
