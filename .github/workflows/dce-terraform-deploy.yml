@@ -16,17 +16,21 @@ jobs:
     name: "Terraform Deploy"
     steps:
       - uses: actions/checkout@v3
-      - name: Install Azure CLI
-        run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-      - name: Install Terraform
+      # - name: Install Azure CLI
+      #   run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      # - name: Install Terraform
+      #   run: |
+      #     sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+      #     wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      #     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      #     sudo apt update && sudo apt-get install terraform
+      # - name: Az Login
+      #   run: az login --allow-no-subscriptions --service-principal -u "9bba227c-06dd-4b89-8635-301eb06d742b" -p "_5F8Q~qcyqlFVJAO0J8wkNWer4g94NRiptubfdBr" --tenant "fac4f30d-a2ea-4dda-9871-1dc986c702bd"
+      #   timeout-minutes: 1
+      - name: echo shell script
         run: |
-          sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-          sudo apt update && sudo apt-get install terraform
-      - name: Az Login
-        run: az login --allow-no-subscriptions --service-principal -u "9bba227c-06dd-4b89-8635-301eb06d742b" -p "_5F8Q~qcyqlFVJAO0J8wkNWer4g94NRiptubfdBr" --tenant "fac4f30d-a2ea-4dda-9871-1dc986c702bd"
-        timeout-minutes: 1
+          ls -l 
+          head prerequisite_resources.sh
       - name: Bootstrap
         run: ./prerequisite_resources.sh $TEAM $ENVIRONEMT $LOCATION
         working-directory: bootstrap
