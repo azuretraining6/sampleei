@@ -10,7 +10,7 @@ jobs:
       ENVIRONEMT: production
       LOCATION: eastus
       ARM_CLIENT_ID: 7c8e6ffe-4a06-41bd-ac7e-4a7dd5b7d067
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_CLIENT_SECRET: _5F8Q~qcyqlFVJAO0J8wkNWer4g94NRiptubfdBr
       ARM_SUBSCRIPTION_ID: 14794eab-e638-4c6e-9e78-33c378312767
       ARM_TENANT_ID: fac4f30d-a2ea-4dda-9871-1dc986c702bd
     name: "Terraform Deploy"
