@@ -27,10 +27,8 @@ jobs:
       - name: Az Login
         run: az login --allow-no-subscriptions --service-principal -u "9bba227c-06dd-4b89-8635-301eb06d742b" -p "_5F8Q~qcyqlFVJAO0J8wkNWer4g94NRiptubfdBr" --tenant "fac4f30d-a2ea-4dda-9871-1dc986c702bd"
         timeout-minutes: 1
-      - name: echo shell script
-        run: |
-          ls -l ./bootstrap 
-          head ./bootstrap/prerequisite_resources.sh
+      - name: add execute permissiotn to bootstrap
+        run: chmod +x ./bootstrap/prerequisite_resources.sh
       - name: Bootstrap
         run: ./bootstrap/prerequisite_resources.sh $TEAM $ENVIRONEMT $LOCATION
         #working-directory: bootstrap
